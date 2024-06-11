@@ -3,13 +3,13 @@ pragma solidity 0.8.18;
 
 contract myBooking {
     uint public totalBooked;
-    mapping(address => bool) public hasBooked;
+    mapping(address => bool) public booked;
 
     function seatBooking() public payable {
-        require(!hasBooked[msg.sender], "Already Booked");
+        require(!booked[msg.sender], "Already Booked");
         
         totalBooked++;
-        hasBooked[msg.sender] = true;
+        booked[msg.sender] = true;
 
         if (totalBooked > 4) {
             revert("Booking limit has exceeded");
